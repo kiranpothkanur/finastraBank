@@ -210,8 +210,6 @@ export default {
 				];
 			}
 			this.$emit("updateFilteredProducts", this.localFilteredProducts);
-			this.selectedProduct = null;
-			this.selectedProductType = null;
 		},
 	},
 };
