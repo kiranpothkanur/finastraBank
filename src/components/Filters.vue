@@ -93,7 +93,7 @@
 						</v-list-item>
 
 						<v-list-item>
-							<v-btn class="text-capitalize mx-auto" @click="filter" :disabled="!selectedProductType || selectedProductType == 'None'">
+							<v-btn class="text-capitalize mx-auto" @click="filter" :disabled="!selectedProductType">
 								Filter
 								<v-icon right>fas fa-filter</v-icon>
 							</v-btn>
@@ -180,10 +180,18 @@ export default {
 		filter() {
 			this.closeFilterMenuOnContentClick = true;
 
+			//If Product type is None
+			if (this.selectedProductType === "None") {
+				this.localFilteredProducts = { ...this.products };
+			}
+
 			//If only Product type is provided in FILTER SECTION
 
 			// Initialization needed
-			if ((this.selectedProductType && !this.selectedProduct) || (this.selectedProductType && this.selectedProduct === "None")) {
+			else if (
+				(this.selectedProductType && !this.selectedProduct && this.selectedProductType != "None" && !this.selectedProduct) ||
+				(this.selectedProductType && this.selectedProduct === "None")
+			) {
 				this.localFilteredProducts = {};
 
 				Object.keys(this.products).forEach((productType) => {
